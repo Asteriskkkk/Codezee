@@ -1,0 +1,51 @@
+
+<?php
+include("../header.php");
+include("../dbconnect.php");
+    
+ 
+
+  
+  
+
+  
+  $currentDate=date("Y/m/d");
+  if(isset($_POST["name1"])){
+      
+      $contact->from_form = "trial class";
+      $contact->from_name = $_POST['name1'];
+      $contact->from_email = $_POST['email1'];
+      $contact->from_mobile = $_POST["mobile1"];
+      $info="Form Name: trial class./Name: ".$_POST["name1"]."/ email: ".$_POST["email1"]."/ mobile: ".$_POST["mobile1"];
+      $query="INSERT INTO users (formname,name,email,mobile,date) VALUES ('trial class','".$_POST['name1']."','".$_POST['email1']."','".$_POST["mobile1"]."','".$currentDate."')";
+      mysqli_query($conn,$query);
+      echo "Thank You ",$_POST["name1"];
+    } 
+    elseif(isset($_POST["name2"])){
+      
+      $contact->from_form = "enquiry";
+      $contact->from_name = $_POST['name2'];
+      $contact->from_email = $_POST['email2'];
+      $contact->from_mobile = $_POST["mobile2"];
+      $info="Form Name: enquiry./Name: ".$_POST["name2"]."/ email: ".$_POST["email2"]."/ mobile: ".$_POST["mobile2"];
+      $query="INSERT INTO users (formname,name,email,mobile) VALUES ('enquiry','".$_POST['name2']."','".$_POST['email2']."','".$_POST["mobile2"]."')";
+      mysqli_query($conn,$query);
+      echo "Thank You ",$_POST["name2"];
+    } 
+    else {
+      
+    }
+
+  
+    $headers = "From: tarun@codezee.in\r\n";
+    $contact1=Json_encode($contact);
+    mail("tarunpat1971@gmail.com","php",$info,$headers);
+    
+  
+  
+  
+  
+?>
+</body>
+
+</html>
